@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 from support.globals import alert_danger, alert_success
 
 class Contacto(models.Model):
@@ -49,8 +50,8 @@ class Contacto(models.Model):
 
     # Modifica un Contacto en particular
     def modificar_contacto(self, nombre, apellidos, telefono, calle, poblacion, codigo_postal, pais, email, sitio_web):
-        # Se comprueba que no existe ningun contacto con el email al que se quiere modificar este
-        if Contacto.objects.filter(email = email):
+        # Se comprueba que no existe ningun contacto con el email al que se quiere modificar este (Obviando al propio contacto por supuesto)
+        if Contacto.objects.filter(~Q(id = self.id), email = email):
             message = 'Ya existe un Contacto con email: %s' % (email)
             print(message)
             return {

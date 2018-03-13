@@ -68,7 +68,7 @@
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption font-dark">
-                        <i class="fa fa-users font-dark"></i>
+                        <i class="icon icon-users"></i>
                         <span class="caption-subject bold uppercase">Contactos</span>
                     </div>
                 </div>
@@ -82,6 +82,7 @@
                                 <th>Email</th>
                                 <th>Sitio Web</th>
                                 <th>Direccion</th>
+                                <th>Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -89,10 +90,26 @@
                                 <tr>
                                     <td>{{ contacto.nombre }}</td>
                                     <td>{{ contacto.apellidos }}</td>
-                                    <td>{{ contacto.telefono }}</td>
+                                    <td>
+                                        {% if contacto.telefono %}
+                                            {{ contacto.telefono }}
+                                        {% endif %}
+                                    </td>
                                     <td>{{ contacto.email }}</td>
-                                    <td>{{ contacto.sitio_web }}</td>
+                                    <td>
+                                        {% if contacto.sitio_web %}
+                                            {{ contacto.sitio_web }}
+                                        {% endif %}
+                                    </td>
                                     <td>{{ contacto.calle }}, {{ contacto.codigo_postal }}, {{ contacto.poblacion }} ({{ contacto.pais }})</td>
+                                    <td  align="center">
+                                        <a href = '{% url 'contactos:modificar_contacto' contacto.id %}' class = "btn btn-sm btn-outline yellow"  title = 'Modificar'>
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a href = '{% url 'contactos:eliminar_contacto' contacto.id %}' class = "btn btn-sm btn-outline red"  title = 'Eliminar' data-toggle = "confirmation" data-placement = "left" data-popout = "true">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>

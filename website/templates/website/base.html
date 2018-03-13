@@ -50,7 +50,6 @@
         {% endblock css %}
 
     <!-- END HEAD -->
-
     <body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo">
         <!-- BEGIN HEADER -->
         <div class="page-header navbar navbar-fixed-top">
@@ -63,25 +62,6 @@
                     </a>
                 </div>
                 <!-- END LOGO -->
-
-                <!-- BEGIN PAGE TOP -->
-                <div class="page-top">
-                    <!-- BEGIN HEADER SEARCH BOX -->
-                    <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
-                    <form class="search-form" action="page_general_search_2.html" method="GET">
-                        <div class="input-group">
-                            <input type="text" class="form-control input-sm" placeholder="Search..." name="query">
-                            <span class="input-group-btn">
-                                <a href="javascript:;" class="btn submit">
-                                    <i class="icon-magnifier"></i>
-                                </a>
-                            </span>
-                        </div>
-                    </form>
-                    <!-- END HEADER SEARCH BOX -->
-
-                </div>
-                <!-- END PAGE TOP -->
             </div>
             <!-- END HEADER INNER -->
         </div>
@@ -94,16 +74,7 @@
             <!-- BEGIN SIDEBAR -->
             <div class="page-sidebar-wrapper">
                 <!-- BEGIN SIDEBAR -->
-                <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-                <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
                 <div class="page-sidebar navbar-collapse collapse">
-                    <!-- BEGIN SIDEBAR MENU -->
-                    <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
-                    <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
-                    <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
-                    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-                    <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
-                    <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
                     <ul class="page-sidebar-menu   " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                         <li class="nav-item start active">
                             <a href="{% url 'website:index' %}" class="nav-link nav-toggle">
@@ -113,24 +84,12 @@
                             </a>
                         </li>
                         <li class="heading">
-                            <h3 class="uppercase">CONSULTA</h3>
+                            <h3 class="uppercase">Opciones</h3>
                         </li>
                         <li class="nav-item  ">
                             <a href="{% url 'contactos:buscar_contactos' %}" class="nav-link nav-toggle">
                                 <i class="fa fa-search"></i>
                                 <span class="title">Buscar Contactos</span>
-                            </a>
-
-                        </li>
-
-
-                        <li class="heading">
-                            <h3 class="uppercase">ADMINISTRACION</h3>
-                        </li>
-                        <li class="nav-item  ">
-                            <a href="{% url 'contactos:administrar_contactos' %}" class="nav-link nav-toggle">
-                                <i class="fa fa-gear"></i>
-                                <span class="title">Administrar Contactos</span>
                             </a>
 
                         </li>
@@ -166,9 +125,8 @@
         <!-- END CONTAINER -->
         <!-- BEGIN FOOTER -->
         <div class="page-footer">
-            <div class="page-footer-inner"> 2016 &copy; Metronic Theme By
-                <a target="_blank" href="http://keenthemes.com">Keenthemes</a> &nbsp;|&nbsp;
-                <a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" title="Purchase Metronic just for 27$ and get lifetime updates for free" target="_blank">Purchase Metronic!</a>
+            <div class="page-footer-inner"> 2018 &copy;
+                <a target="_blank" href="http://www.erickmhq.com">Erick M. Hdez</a>
             </div>
             <div class="scroll-to-top">
                 <i class="icon-arrow-up"></i>
@@ -190,6 +148,7 @@
         <script src="{% static 'global/plugins/bootstrap-switch/js/bootstrap-switch.min.js' %}" type="text/javascript"></script>
         <!-- END CORE PLUGINS -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
+        <script src='{% static "global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js" %}' type="text/javascript"></script>
         <script src="{% static 'global/plugins/moment.min.js' %}" type="text/javascript"></script>
         <script src="{% static 'global/scripts/datatable.js' %}" type="text/javascript"></script>
         <script src="{% static 'global/plugins/datatables/datatables.min.js' %}" type="text/javascript"></script>
@@ -212,6 +171,8 @@
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
         <script src="{% static 'pages/scripts/dashboard.min.js' %}" type="text/javascript"></script>
         <script src="{% static 'pages/scripts/table-datatables-fixedheader.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'pages/scripts/ui-confirmations.min.js' %}" type="text/javascript"></script>
+
         <!-- END PAGE LEVEL SCRIPTS -->
         <!-- BEGIN THEME LAYOUT SCRIPTS -->
         <script src="{% static 'layouts/layout4/scripts/layout.min.js' %}" type="text/javascript"></script>

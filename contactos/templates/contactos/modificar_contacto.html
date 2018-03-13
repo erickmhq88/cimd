@@ -3,7 +3,7 @@
 {% load widget_tweaks %}
 
 {% block tab_title %}
-    NUEVO CONTACTO
+    MODIFICAR CONTACTO
 {% endblock tab_title %}
 
 {% block content %}
@@ -11,7 +11,7 @@
     <div class="page-head">
         <!-- BEGIN PAGE TITLE -->
         <div class="page-title">
-            <h1>Crear Nuevo Contacto
+            <h1>Modificar Contacto
             </h1>
         </div>
         <!-- END PAGE TITLE -->
@@ -24,8 +24,9 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="{% url 'contactos:nuevo_contacto' %}">
-                <span class="active">Nuevo Contacto</span>
+{#            <a href="{% url 'contactos:modificar_contacto' contacto_id %}">#}
+            <a href="">
+                <span class="active">Modificar Contacto</span>
             </a>
         </li>
     </ul>
@@ -51,14 +52,14 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label">{{ form.nombre.label }} <span style="color: red">*</span></label>
                                 <div class="col-md-6">
-                                    {{ form.nombre | attr:'class:form-control' | attr:'name:nombre' | attr:'placeholder:Nombre' }}
+                                    {{ form.nombre | attr:'class:form-control' | attr:'name:nombre' | attr:'placeholder:Nombre' | attr:'required' }}
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label">{{ form.apellidos.label }} <span style="color: red">*</span></label>
                                 <div class="col-md-6">
-                                    {{ form.apellidos | attr:'class:form-control' | attr:'name:apellidos' | attr:'placeholder:Apellidos' }}
+                                    {{ form.apellidos | attr:'class:form-control' | attr:'name:apellidos' | attr:'placeholder:Apellidos' | attr:'required' }}
                                 </div>
                             </div>
 
@@ -72,7 +73,7 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label">{{ form.email.label }} <span style="color: red">*</span></label>
                                 <div class="col-md-6">
-                                    {{ form.email | attr:'class:form-control' | attr:'name:email' | attr:'placeholder:E-Mail' }}
+                                    {{ form.email | attr:'class:form-control' | attr:'name:email' | attr:'placeholder:E-Mail' | attr:'required' }}
                                 </div>
                             </div>
 
@@ -99,28 +100,28 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label">{{ form.calle.label }} <span style="color: red">*</span></label>
                                 <div class="col-md-6">
-                                    {{ form.calle | attr:'class:form-control' | attr:'name:calle' | attr:'placeholder:Calle' | attr:'id:route' }}
+                                    {{ form.calle | attr:'class:form-control' | attr:'name:calle' | attr:'placeholder:Calle' | attr:'id:route' | attr:'required' }}
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label">{{ form.poblacion.label }} <span style="color: red">*</span></label>
                                 <div class="col-md-6">
-                                    {{ form.poblacion | attr:'class:form-control' | attr:'name:poblacion' | attr:'placeholder:Poblacion' | attr:'id:locality' }}
+                                    {{ form.poblacion | attr:'class:form-control' | attr:'name:poblacion' | attr:'placeholder:Poblacion' | attr:'id:locality' | attr:'required' }}
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label">{{ form.codigo_postal.label }} <span style="color: red">*</span></label>
                                 <div class="col-md-6">
-                                    {{ form.codigo_postal | attr:'class:form-control' | attr:'name:codigo_postal' | attr:'placeholder:Codigo Postal' | attr:'id:postal_code' }}
+                                    {{ form.codigo_postal | attr:'class:form-control' | attr:'name:codigo_postal' | attr:'placeholder:Codigo Postal' | attr:'id:postal_code' | attr:'required' }}
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label">{{ form.pais.label }} <span style="color: red">*</span></label>
                                 <div class="col-md-6">
-                                    {{ form.pais | attr:'class:form-control' | attr:'name:pais' | attr:'placeholder:Pais' | attr:'id:country' }}
+                                    {{ form.pais | attr:'class:form-control' | attr:'name:pais' | attr:'placeholder:Pais' | attr:'id:country' | attr:'required' }}
                                 </div>
                             </div>
 
@@ -128,7 +129,7 @@
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-6">
-                                    <button type="submit" class="btn btn-block blue-hoki">CREAR CONTACTO</button>
+                                    <button type="submit" class="btn btn-block blue-hoki">MODIFICAR CONTACTO</button>
                                 </div>
                             </div>
                         </div>

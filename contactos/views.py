@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 from contactos.models import Contacto
-from contactos.forms import Filtro_Contactos_Form
+from contactos.forms import Filtro_Contactos_Form, Contacto_Form
+from support import globals
 
 def buscar_contactos(request):
 
@@ -64,44 +65,126 @@ def buscar_contactos(request):
 
     return render(request, 'contactos/buscar_contactos.html', context)
 
-def administrar_contactos(request):
-    context = {
-
-    }
-
-    return render(request, 'contactos/administrar_contactos.html', context)
-
 def nuevo_contacto(request):
 
+    G_APIKey = globals.G_APIKey
+
     if request.method == 'POST':
-        nombre = request.POST['nombre']
-        apellidos = request.POST['apellidos']
-        telefono = request.POST['telefono']
-        email = request.POST['email']
-        sitio_web = request.POST['sitio_web']
-        calle = request.POST['calle']
-        poblacion = request.POST['poblacion']
-        codigo_postal = request.POST['codigo_postal']
-        pais = request.POST['pais']
 
-        n_contacto = Contacto.nuevo_contacto(
-            nombre = nombre,
-            apellidos = apellidos,
-            telefono = telefono,
-            calle = calle,
-            poblacion = poblacion,
-            codigo_postal = codigo_postal,
-            pais = pais,
-            email = email,
-            sitio_web = sitio_web,
-        )
+        form = Contacto_Form(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            apellidos = form.cleaned_data['apellidos']
+            telefono = form.cleaned_data['telefono']
+            email = form.cleaned_data['email']
+            sitio_web = form.cleaned_data['sitio_web']
+            calle = form.cleaned_data['calle']
+            poblacion = form.cleaned_data['poblacion']
+            codigo_postal = form.cleaned_data['codigo_postal']
+            pais = form.cleaned_data['pais']
 
-        context = {
-            'message': n_contacto['message'],
-            'class_alert': n_contacto['class_alert'],
-        }
+            n_contacto = Contacto.nuevo_contacto(
+                nombre = nombre,
+                apellidos = apellidos,
+                telefono = telefono,
+                calle = calle,
+                poblacion = poblacion,
+                codigo_postal = codigo_postal,
+                pais = pais,
+                email = email,
+                sitio_web = sitio_web,
+            )
+
+            context = {
+                'form': Contacto_Form(),
+                'message': n_contacto['message'],
+                'class_alert': n_contacto['class_alert'],
+                'G_APIPKey': G_APIKey,
+            }
+
+        else:
+            context = {
+                'form': Contacto_Form(request.POST),
+                'message': 'Hay errores en el Formulario',
+                'class_alert': 'alert alert-danger',
+                'G_APIPKey': G_APIKey,
+            }
 
     else:
-        context = {}
+        context = {
+            'form': Contacto_Form(),
+            'G_APIPKey': G_APIKey,
+        }
 
     return render(request, 'contactos/nuevo_contacto.html', context)
+
+def modificar_contacto(request, contacto_id):
+
+    contacto = Contacto.objects.get(id = contacto_id)
+    G_APIKey = globals.G_APIKey
+
+    datos_contacto = {
+        'nombre': contacto.nombre,
+        'apellidos': contacto.apellidos,
+        'telefono': contacto.telefono,
+        'email': contacto.email,
+        'sitio_web': contacto.sitio_web,
+        'calle': contacto.calle,
+        'poblacion': contacto.poblacion,
+        'codigo_postal': contacto.codigo_postal,
+        'pais': contacto.pais,
+    }
+
+    if request.method == 'POST':
+        form = Contacto_Form(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            apellidos = form.cleaned_data['apellidos']
+            telefono = form.cleaned_data['telefono']
+            email = form.cleaned_data['email']
+            sitio_web = form.cleaned_data['sitio_web']
+            calle = form.cleaned_data['calle']
+            poblacion = form.cleaned_data['poblacion']
+            codigo_postal = form.cleaned_data['codigo_postal']
+            pais = form.cleaned_data['pais']
+
+            m_contacto = contacto.modificar_contacto(
+                nombre = nombre,
+                apellidos = apellidos,
+                telefono = telefono,
+                email = email,
+                sitio_web = sitio_web,
+                calle = calle,
+                poblacion = poblacion,
+                codigo_postal = codigo_postal,
+                pais = pais,
+            )
+
+            context = {
+                'form': form,
+                'message': m_contacto['message'],
+                'class_alert': m_contacto['class_alert'],
+                'G_APIPKey': G_APIKey,
+            }
+
+        else:
+            print(form.errors)
+            context = {
+                'form': form,
+                'message': 'Para Modificar la direccion debe escribir en el campo "Direccion" y seleccionar una opcion disponible',
+                'class_alert': 'alert alert-danger',
+                'G_APIPKey': G_APIKey,
+            }
+
+    else:
+        context = {
+            'form': Contacto_Form(datos_contacto),
+            'G_APIPKey': G_APIKey,
+        }
+
+    return render(request, 'contactos/modificar_contacto.html', context)
+
+def eliminar_contacto(request, contacto_id):
+    contacto = Contacto.objects.get(id = contacto_id)
+    contacto.eliminar_contacto()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
