@@ -5,18 +5,12 @@
     NUEVO CONTACTO
 {% endblock tab_title %}
 
-{% block css %}
-    <link href="{% static 'global/css/custom/google_form.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'global/css/custom/map.css' %}" rel="stylesheet" type="text/css" />
-{% endblock css %}
-
 {% block content %}
     <!-- BEGIN PAGE HEAD-->
     <div class="page-head">
         <!-- BEGIN PAGE TITLE -->
         <div class="page-title">
-            <h1>Admin Dashboard 2
-                <small>statistics, charts, recent events and reports</small>
+            <h1>Crear Nuevo Contacto
             </h1>
         </div>
         <!-- END PAGE TITLE -->
@@ -25,59 +19,128 @@
     <!-- BEGIN PAGE BREADCRUMB -->
     <ul class="page-breadcrumb breadcrumb">
         <li>
-            <a href="index.html">Home</a>
+            <a href="{% url 'website:index' %}">Inicio</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <span class="active">Dashboard</span>
+            <a href="{% url 'contactos:nuevo_contacto' %}">
+                <span class="active">Nuevo Contacto</span>
+            </a>
         </li>
     </ul>
     <!-- END PAGE BREADCRUMB -->
+
     <!-- BEGIN PAGE BASE CONTENT -->
+    {% if message %}
+        <div class = '{{ class_alert }}'>
+            {{ message }}
+        </div>
+    {% endif %}
+
     <div class="row">
+        <div class = "col-md-12">
+            <div class="portlet light ">
+
+                <div class="portlet-body">
+
+                    <!-- BEGIN FORM-->
+                    <form action="" class="form-horizontal" method = 'POST'>{% csrf_token %}
+                        <div class="form-body">
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Nombre</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Nombre" name = 'nombre'>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Apellidos</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Apellidos"  name = 'apellidos'>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Telefono</label>
+                                <div class="col-md-6">
+                                    <input type="number" class="form-control" placeholder="Telefono"  name = 'telefono'>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">E-Mail</label>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" placeholder="E-Mail"  name = 'email'>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Sitio Web</label>
+                                <div class="col-md-6">
+                                    <input type="url" class="form-control" placeholder="Sitio Web"  name = 'sitio_web'>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Direccion</label>
+                                <div class="col-md-6">
+                                    <div id="locationField">
+                                        <input type="text" class="form-control" placeholder="Direccion" id = 'autocomplete' onFocus="geolocate()">
+                                    </div>
+                                    <span class="help-block">Empieza a introducir la direccion del contacto y selecciona entre las opciones disponibles</span>
+                                </div>
+                            </div>
 
 
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Calle</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder = "Calle" id = "route" disabled = 'true' name = 'calle'>
+                                </div>
+                            </div>
 
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Poblacion</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Poblacion" id="locality" disabled="true" name = 'poblacion'>
+                                </div>
+                            </div>
 
-<div id="locationField">
-<input id="autocomplete" placeholder="Enter your address"
-onFocus="geolocate()" type="text"></input>
-</div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Codigo Postal</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Codigo Postal" id="postal_code" disabled="true" name = 'codigo_postal'>
+                                </div>
+                            </div>
 
-<table id="address">
-<tr>
-<td class="label">Street address</td>
-<td class="slimField"><input class="field" id="street_number"
-disabled="true"></input></td>
-<td class="wideField" colspan="2"><input class="field" id="route"
-disabled="true"></input></td>
-</tr>
-<tr>
-<td class="label">City</td>
-<!-- Note: Selection of address components in this example is typical.
-You may need to adjust it for the locations relevant to your app. See
-https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
--->
-<td class="wideField" colspan="3"><input class="field" id="locality"
-disabled="true"></input></td>
-</tr>
-<tr>
-<td class="label">State</td>
-<td class="slimField"><input class="field"
-id="administrative_area_level_1" disabled="true"></input></td>
-<td class="label">Zip code</td>
-<td class="wideField"><input class="field" id="postal_code"
-disabled="true"></input></td>
-</tr>
-<tr>
-<td class="label">Country</td>
-<td class="wideField" colspan="3"><input class="field"
-id="country" disabled="true"></input></td>
-</tr>
-</table>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Pais</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Pais" id="country" disabled="true" name = 'pais'>
+                                </div>
+                            </div>
 
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-6">
+                                    <button type="submit" class="btn btn-block blue-hoki">CREAR CONTACTO</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- END FORM-->
+                </div>
+            </div>
 
+{#            Don't care Fields (as hidden ) #}
+            <input class="hidden" id="street_number" disabled="true"></input>
+            <input class="hidden" id="administrative_area_level_1" disabled="true"></input>
 
+        </div>
     </div>
 {% endblock content %}
 
