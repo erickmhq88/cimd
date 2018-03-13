@@ -1,0 +1,5 @@
+.idea/
+*.pyc
+*/media/
+*settings__dev.py
+*settings__prod.py

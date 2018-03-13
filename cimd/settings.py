@@ -22,12 +22,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'me@f@!zcv815mxls8t&^kisn^w+^pptf1^s(na^k&ce=s#83za'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['192.168.1.52']
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,6 +31,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'contactos',
+    'website',
 ]
 
 MIDDLEWARE = [
@@ -68,21 +64,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'cimd.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres_db',
-        'USER': 'postgres',
-        'PASSWORD': 'Ipvce/*-789456123',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    },
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -121,3 +102,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
+from cimd.settings__dev import *
+from cimd.settings__prod import *
